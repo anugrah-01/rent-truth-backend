@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id        String   @id @default(uuid())
+  address   String
+  city      String
+  pincode   String
+  reviews   Review[]    //One property many reviews-->one to many
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  comment     String
+  rating      Int
+  propertyId  String
+  property    Property @relation(fields: [propertyId], references: [id])   //foreign key relation 
+  createdAt   DateTime @default(now())
+}
