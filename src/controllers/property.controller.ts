@@ -18,11 +18,15 @@ export const createProperty = async(req: Request, res: Response) => {
 
 export const getProperties = async(req: Request, res: Response) => {
     try {
-        const properties = await propertyService.getProperties();
+        const city = req.query.city as string | undefined;
+        const pincode = req.query.pincode as string | undefined;
+
+        const properties = await propertyService.getProperties({city, pincode});
         res.status(200).json({
             success: true,
             data: properties
         });
+
     } catch (error: any) {
         res.status(500).json({
             success: false,

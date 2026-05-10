@@ -1,9 +1,15 @@
 import * as propertyRepository from "../repositories/property.repository";
+import * as reviewRepository from "../repositories/review.repository";
 
 interface CreatePropertyData {
   address: string;
   city: string;
   pincode: string;
+}
+
+interface GetPropertiesFilters{
+  city?: string;
+  pincode?: string;
 }
 
 export const createProperty = async (data: CreatePropertyData) => {
@@ -13,8 +19,8 @@ export const createProperty = async (data: CreatePropertyData) => {
     return propertyRepository.createProperty(data);
 };
 
-export const getProperties = async () => {
-    return propertyRepository.getProperties();
+export const getProperties = async (filters?: GetPropertiesFilters) => {
+    return propertyRepository.getProperties(filters);
 };
 
 export const getPropertyById = async (id: string) => {
@@ -26,6 +32,11 @@ export const getPropertyById = async (id: string) => {
     if(!property){
         throw new Error("Property not found");
     }
+
+    const averageRating = await reviewRepository.getAverageRating(id);
     
-    return property;
+    return {
+        ...property,
+        averageRating
+    };
 };
