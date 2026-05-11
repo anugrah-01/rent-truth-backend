@@ -1,9 +1,12 @@
 import {Request, Response} from "express";
 import * as propertyService from "../services/property.service";
+import { createPropertySchema } from "../validators/property.validator";
 
 export const createProperty = async(req: Request, res: Response) => {
     try {
-        const property = await propertyService.createProperty(req.body);
+        const validatedData = createPropertySchema.parse(req.body);
+        const property = await propertyService.createProperty(validatedData);
+        
         res.status(201).json({
             success: true,
             data: property
