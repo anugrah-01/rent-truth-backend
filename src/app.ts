@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import propertyRoutes from './routes/property.routes';
 import reviewRoutes from './routes/review.routes';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use('/properties', propertyRoutes);
 app.use('/reviews', reviewRoutes);
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('Welcome to Rent Truth API');
