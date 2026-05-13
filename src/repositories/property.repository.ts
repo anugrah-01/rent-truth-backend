@@ -23,17 +23,38 @@ export const getProperties = async (filters?: GetPropertiesFilters) => {
     },
 
     include: {
-      reviews: true,           //While fetching properties,also fetch linked reviews-->JOIN behaviour between tables
+      reviews: {                                    //While fetching properties,also fetch linked reviews-->JOIN behaviour between tables
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+        },
+      },        
     },
     
   });    //fetches rows after filter from property table
 };
 
+
 export const getPropertyById = async (id: string) => {
   return prisma.property.findUnique({
     where: { id },
     include: {
-      reviews: true,           //While fetching property,also fetch linked reviews-->JOIN behaviour between tables
+      reviews: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+        },
+      },   
     },
   });
 };

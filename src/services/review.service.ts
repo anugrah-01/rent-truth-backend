@@ -2,9 +2,10 @@ import * as reviewRepository from "../repositories/review.repository";
 import * as propertyRepository from "../repositories/property.repository";
 
 interface CreateReviewData {
-  propertyId: string;
-  rating: number;
   comment: string;
+  rating: number;
+  propertyId: string;
+  userId: string;
 }
 
 export const createReview = async (data: CreateReviewData) => {

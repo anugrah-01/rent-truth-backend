@@ -1,9 +1,10 @@
 import prisma from "../config/prisma";      
 
 interface CreateReviewData {
-  propertyId: string;
-  rating: number;
   comment: string;
+  rating: number;
+  propertyId: string;
+  userId: string;
 }
 
 export const createReview = async (data: CreateReviewData) => {

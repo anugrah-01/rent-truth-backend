@@ -22,6 +22,9 @@ model Review {
   rating      Int
   propertyId  String
   property    Property @relation(fields: [propertyId], references: [id])   //foreign key relation 
+
+  userId     String
+  user       User @relation(fields: [userId], references: [id])   //foreign key relation
   createdAt   DateTime @default(now())
 }
 
@@ -31,6 +34,6 @@ model User {
   name      String
   email     String   @unique
   password  String
-
+  reviews   Review[]
   createdAt DateTime @default(now())
 }
