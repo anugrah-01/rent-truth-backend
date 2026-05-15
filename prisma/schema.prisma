@@ -10,6 +10,8 @@ datasource db {
 model Property {
   id        String   @id @default(uuid())
   address   String
+  averageRating Float @default(0)
+  reviewCount Int @default(0)
   city      String
   pincode   String
   reviews   Review[]    //One property many reviews-->one to many

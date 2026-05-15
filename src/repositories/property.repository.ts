@@ -58,3 +58,13 @@ export const getPropertyById = async (id: string) => {
     },
   });
 };
+
+export const updatePropertyRating = async (propertyId: string, averageRating: number, reviewCouunt: number) => {
+  return prisma.property.update({
+    where: { id: propertyId }, 
+    data: {
+      averageRating,
+      reviewCount: reviewCouunt,
+    },
+  });
+};
