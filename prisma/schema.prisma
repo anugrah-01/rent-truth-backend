@@ -15,6 +15,7 @@ model Property {
   city      String
   pincode   String
   reviews   Review[]    //One property many reviews-->one to many
+  favoritedBy User[]
   createdAt DateTime @default(now())
 }
 
@@ -37,5 +38,6 @@ model User {
   email     String   @unique
   password  String
   reviews   Review[]
+  favoriteProperties Property[]
   createdAt DateTime @default(now())
 }
